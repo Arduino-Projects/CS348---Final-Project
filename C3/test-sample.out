@@ -1,0 +1,9 @@
+# cid	desc	img_file	price	odometer	sold	sid	mid	make	year
+2	slow :(	img.png	$15.99	100	yes	1	2	Atlas	2012
+# rid	review	rating	date	bid	sid
+1	My favourite person in the world!	5	2015-12-10 00:00:00	1	1
+2	What an amazing selllerrrr	5	2023-02-28 03:19:09	1	1
+# cid	desc	img_file	price	odometer	sold	sid	mid	make	year
+1	A FAST CAR	img.png	$15.99	100	not	1	1	Sienna	2022
+2	slow :(	img.png	$15.99	100	yes	1	2	Atlas	2012
+
