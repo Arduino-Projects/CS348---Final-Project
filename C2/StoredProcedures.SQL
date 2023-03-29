@@ -56,3 +56,32 @@ END$$
 DELIMITER ;
 
 
+USE `AutoShopDB`;
+DROP procedure IF EXISTS `modify_comment`;
+
+
+DELIMITER $$
+USE `AutoShopDB`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modify_comment`(IN commentId int, IN commentStr varchar(3000))
+BEGIN
+	UPDATE AutoShopDB.Reviews
+	SET review = commentStr
+	WHERE rid = commentId; 
+END$$
+
+DELIMITER ;
+;
+
+
+USE `AutoShopDB`;
+DROP procedure IF EXISTS `delete_comment`;
+
+DELIMITER $$
+USE `AutoShopDB`$$
+CREATE PROCEDURE `delete_comment` (IN commentId int)
+BEGIN
+	DELETE FROM AutoShopDB.Reviews
+    WHERE rid = commentId;
+END$$
+
+DELIMITER ;
