@@ -63,6 +63,40 @@ app.get("/deleteComment", (req, res) => {
   });
 });
 
+app.get("/modifyComment", (req, res) => {
+  console.log(req.data);
+  const q =
+    "call modify_comment(" +
+    req.query["comment_id"] +
+    ',"' +
+    req.query["review"] +
+    '");';
+  db.query(q, (err, data) => {
+    console.log(q);
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+app.get("/addComment", (req, res) => {
+  console.log(req.data);
+  const q =
+    'call add_comment("' +
+    req.query["review"] +
+    '",' +
+    req.query["rating"] +
+    "," +
+    req.query["bid"] +
+    "," +
+    req.query["cid"] +
+    ");";
+  console.log(q);
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
 app.post("/newcar", (req, res) => {
   const q = 'call add_comment("amazingggg", 5, 1, 1)';
   db.query(q, (err, data) => {

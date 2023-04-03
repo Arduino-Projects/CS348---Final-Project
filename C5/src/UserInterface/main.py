@@ -1,9 +1,7 @@
 import requests
+import subprocess
+import asyncio
 
-
-
-
-userID = 0
 
 def carList():
     print("Please enter the filters for your search, or enter 0/Nothing for no specific filter")
@@ -125,7 +123,7 @@ def ownReviews():
     print()
     print()
     inp = input("Enter the ID of the car of the seller you want reviews on: ")
-
+    carId = inp
     data = {"car_id": inp}
     response = requests.get("http://localhost:8800/reviews", data)
     
@@ -151,11 +149,56 @@ def ownReviews():
     print("4. Go Home")
     inp = input("")
     if inp == '1':
-        carList()
+        addReview(carId)
     elif inp == '2':
-        reviews()
+        modifyReview()
     elif inp == '3':
         deleteReview()
+    else:
+        return
+
+def addReview(carId):
+    review = input("Enter the Review: ")
+    rating = input("Give a rating from 1-5: ")
+
+    data = {"bid": userID, "cid": carId, "review": review, "rating": rating}
+    response = requests.get("http://localhost:8800/addComment", data)
+
+    print("Added!")
+    
+    print()
+    print("Would you like to:")
+    print("1. Modify another review for the same car?")
+    print("2. Modify another review for a different car?")
+    print("3. Go home")
+    inp = input("")
+    if inp == '1':
+        deleteReview()
+    elif inp == '2':
+        ownReviews()
+    else:
+        return
+    
+
+def modifyReview():
+    print()
+    print()
+    inp = input("Enter the ID of the review you want to modify: ")
+    review = input("Please enter what you want to replace it with: ")
+
+    data = {"comment_id": inp, "review" : review}
+    response = requests.get("http://localhost:8800/modifyComment", data)
+    
+    print("Modified!")
+    print("Would you like to:")
+    print("1. Modify another review for the same car?")
+    print("2. Modify another review for a different car?")
+    print("3. Go home")
+    inp = input("")
+    if inp == '1':
+        deleteReview()
+    elif inp == '2':
+        ownReviews()
     else:
         return
 
